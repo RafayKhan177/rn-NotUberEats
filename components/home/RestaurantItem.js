@@ -4,7 +4,10 @@ import React from "react";
 
 export default function RestaurantItems({ restaurants }) {
   return (
-    <TouchableOpacity activeOpacity={1} style={{ marginBottom: 30 }}>
+    <TouchableOpacity
+      activeOpacity={1}
+      style={{ marginBottom: 30, height: "50vh" }}
+    >
       {restaurants &&
         restaurants.map((restaurant, index) => (
           <View

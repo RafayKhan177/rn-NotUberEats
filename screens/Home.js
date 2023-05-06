@@ -1,9 +1,11 @@
 import { SafeAreaView, ScrollView, View } from "react-native";
-import React from "react";
-import HeaderTabs from "../components/HeaderTabs";
-import SearchBar from "../components/SearchBar";
-import Categories from "../components/Categories";
-import RestaurantItems from "../components/RestaurantItem";
+import React, { useEffect, useState } from "react";
+import HeaderTabs from "../components/home/HeaderTabs";
+import SearchBar from "../components/home/SearchBar";
+import Categories from "../components/home/Categories";
+import RestaurantItems from "../components/home/RestaurantItem";
+import { Divider } from "react-native-elements";
+import BottomTabs from "../components/home/BottomTabs";
 const pic =
   "https://th.bing.com/th/id/R.7d5b5e5cd55b25e8c62f26d55c299007?rik=LBpCUVZ88Y4WXA&pid=ImgRaw&r=0";
 const localRestaurants = [
@@ -68,16 +70,45 @@ const localRestaurants = [
 ];
 
 const Home = () => {
+  const [restaurantData, setRestaurantData] = useState([]);
+  const [city, setCity] = useState("San Franciscco");
+  const [activeTab, setActiveTab] = useState("Delivery");
+
+  const getRestaurantFromYulp = () => {
+    setRestaurantData(localRestaurants);
+
+    // const yulpUrl = ``;
+    // const apiOption = {
+    //   headers: {
+    //     Authorization: `Bearer${YULP_API_KEY}`,
+    //   },
+    // };
+    // return fetch(yulpUrl, apiOption)
+    //   .then((res) => rex.json())
+    //   .then((json) =>
+    //     setRestaurantData(
+    //       json.business.filter((business) =>
+    //         business.transections.includes(activeTab.toLowerCase())
+    //       )
+    //     )
+    //   );
+  };
+
+  useEffect(() => {
+    getRestaurantFromYulp();
+  }, [city, activeTab]);
   return (
     <SafeAreaView style={{ backgroundColor: "#eee", flex: 1 }}>
       <View style={{ backgroundColor: "white", paddingTop: 15 }}>
-        <HeaderTabs />
-        <SearchBar />
+        <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+        <SearchBar cityHandler={setCity} />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Categories />
-        <RestaurantItems restaurants={localRestaurants} />
+        <RestaurantItems restaurants={restaurantData} />
       </ScrollView>
+      <Divider width={1} />
+      <BottomTabs />
     </SafeAreaView>
   );
 };

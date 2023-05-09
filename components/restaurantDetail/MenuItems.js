@@ -124,7 +124,7 @@ export default function MenuItems({ food, restaurantName }) {
   const isFoodCart = (food, cartItems) =>
     cartItems.find((item) => item.title === food.title);
 
-  console.log(cartItems, "||||", isFoodCart);
+  // console.log(cartItems, "||||", isFoodCart);
 
   const renderItem = ({ item }) => (
     <View>

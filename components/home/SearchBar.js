@@ -24,6 +24,8 @@ export default function SearchBar({ cityHandler }) {
             marginLeft: 20,
           },
           textInputContainer: {
+            maxWidth: 400,
+            alignSelf: "center",
             backgroundColor: "#eee",
             borderRadius: 50,
             flexDirection: "row",

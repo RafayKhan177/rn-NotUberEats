@@ -219,7 +219,19 @@ const Home = ({ navigation }) => {
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Categories />
-        <RestaurantItems restaurants={restaurantData} navigation={navigation} />
+        <View
+          style={{
+            alignSelf: "center",
+            justifyContent: "center",
+            flexDirection: "row",
+            flexWrap: "wrap",
+          }}
+        >
+          <RestaurantItems
+            restaurants={restaurantData}
+            navigation={navigation}
+          />
+        </View>
       </ScrollView>
       <Divider width={1} />
       <BottomTabs />

@@ -19,7 +19,12 @@ export default function RestaurantItems({ navigation, ...props }) {
               categories: restaurant.categories,
             })
           }
-          style={{ marginBottom: 30, maxWidth: 500 }}
+          style={{
+            marginBottom: 30,
+            maxWidth: 500,
+            minWidth: 320,
+            marginHorizontal: 5,
+          }}
         >
           <View
             style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}

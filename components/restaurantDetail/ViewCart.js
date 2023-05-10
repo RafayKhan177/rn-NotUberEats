@@ -3,7 +3,10 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import OrderItem from "./OrderItem";
 import { firebase } from "../../firebase";
+import { Platform } from "react-native";
 import LottieView from "lottie-react-native";
+import lottie from "lottie-web";
+import { Image } from "react-native";
 
 export default function ViewCart({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -44,15 +47,17 @@ export default function ViewCart({ navigation }) {
     modalContainer: {
       flex: 1,
       justifyContent: "flex-end",
-      backgroundColor: "rgba(0,0,0,0,7)",
+      backgroundColor: "rgba(0,0,0,0.7)",
+      // borderTopLeftRadius: 10,
       // borderTopRightRadius: 10,
-      // borderTopEndRadius: 10,
     },
     modalCheckoutContaienr: {
       backgroundColor: "white",
       padding: 16,
       height: 500,
       borderWidth: 1,
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
     },
     restaurantName: {
       textAlign: "center",
@@ -66,10 +71,11 @@ export default function ViewCart({ navigation }) {
       marginTop: 15,
     },
     subTotalText: {
+      color: "rgba(0,0,0,0.6)",
       textAlign: "left",
       fontWeight: 600,
       fontSize: 15,
-      bottom: 10,
+      bottom: 5,
     },
   });
 
@@ -102,7 +108,7 @@ export default function ViewCart({ navigation }) {
                 }}
               >
                 <Text style={{ color: "white", fontSize: 20 }}>Checkout</Text>
-                <Text
+                {/* <Text
                   style={{
                     position: "absolute",
                     right: 20,
@@ -112,7 +118,7 @@ export default function ViewCart({ navigation }) {
                   }}
                 >
                   {total ? totalUSD : ""}
-                </Text>
+                </Text> */}
               </TouchableOpacity>
             </View>
           </View>
@@ -124,10 +130,14 @@ export default function ViewCart({ navigation }) {
   return (
     <>
       <Modal
+        style={{
+          overflow: "hidden",
+          borderColor: "grey",
+        }}
         animationType="slide"
         visible={modalVisible}
         transparent={true}
-        onRequestClose={() => setModalVisible}
+        onRequestClose={() => setModalVisible(false)}
       >
         {checkOutModalContent()}
       </Modal>
@@ -141,6 +151,9 @@ export default function ViewCart({ navigation }) {
             position: "absolute",
             bottom: 80,
             zIndex: 999,
+            justifyContent: "center",
+            alignItems: "center",
+            alignSelf: "center",
           }}
         >
           <View
@@ -155,10 +168,10 @@ export default function ViewCart({ navigation }) {
                 marginTop: 20,
                 backgroundColor: "black",
                 flexDirection: "row",
-                justifyContent: "flex-end",
-                // alignItems: "center",
+                justifyContent: "center",
+                alignSelf: "center",
                 padding: 15,
-                borderRadius: 30,
+                borderRadius: 5,
                 width: 300,
                 position: "relative",
               }}
@@ -167,7 +180,7 @@ export default function ViewCart({ navigation }) {
               <Text style={{ color: "white", fontSize: 20, marginRight: 30 }}>
                 View Cart
               </Text>
-              <Text style={{ fontSize: 20, color: "white" }}>{totalUSD}</Text>
+              {/* <Text style={{ fontSize: 20, color: "white" }}>{totalUSD}</Text> */}
             </TouchableOpacity>
           </View>
         </View>
@@ -185,11 +198,26 @@ export default function ViewCart({ navigation }) {
             width: "100%",
           }}
         >
-          <LottieView
-            style={{ height: 200 }}
-            source={require("../../assets/animations/scanner.json")}
-            autoPlay={3}
-          />
+          {Platform.OS === "web" ? (
+            // component for web platform
+            <Image
+              style={{
+                height: 100,
+                width: 100,
+                alignSelf: "center",
+                marginTop: 600,
+                marginVertical: 20,
+              }}
+              source={require("../../assets/icons/loop.png")}
+            />
+          ) : (
+            // component for mobile platforms
+            <LottieView
+              style={{ height: 200 }}
+              source={require("../../assets/animations/scanner.json")}
+              autoPlay={3}
+            />
+          )}
         </View>
       ) : (
         <></>

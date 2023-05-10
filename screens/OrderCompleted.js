@@ -1,9 +1,10 @@
-import { View, Text, SafeAreaView, ScrollView } from "react-native";
+import { View, Text, SafeAreaView, ScrollView, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import LottieView from "lottie-react-native";
+// import LottieView from "lottie-react-native";
 import MenuItems from "../components/restaurantDetail/MenuItems";
 import { firebase } from "../firebase";
+import { Platform } from "react-native";
 
 export default function OrderCompleted() {
   const [lastOrder, setLastOrder] = useState({
@@ -55,12 +56,26 @@ export default function OrderCompleted() {
           height: "100%",
         }}
       >
-        <LottieView
-          style={{ height: 100, alignSelf: "center", marginBottom: 30 }}
-          source={require("../assets/animations/check-mark.json")}
-          autoPlay={true}
-          loop={false}
-        />
+        {Platform.OS === "web" ? (
+          // component for web platform
+          <Image
+            style={{
+              height: 100,
+              width: 100,
+              alignSelf: "center",
+              marginVertical: 20,
+            }}
+            source={require(".././assets/images/confirmation.png")}
+          />
+        ) : (
+          // component for mobile platforms
+          <LottieView
+            style={{ height: 100, alignSelf: "center", marginBottom: 30 }}
+            source={require("../assets/animations/check-mark.json")}
+            autoPlay={true}
+            loop={false}
+          />
+        )}
 
         <Text
           style={{
@@ -73,17 +88,32 @@ export default function OrderCompleted() {
         >
           🍴 Order placed at {restaurantName} for {totalUSD} USD! 🎉
         </Text>
-        <LottieView
-          style={{
-            height: 100,
-            alignSelf: "center",
-            marginBottom: 30,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          source={require("../assets/animations/cooking.json")}
-          autoPlay={true}
-        />
+        {Platform.OS === "web" ? (
+          // component for web platform
+          <Image
+            style={{
+              height: 100,
+              width: 100,
+              alignSelf: "center",
+              marginVertical: 20,
+            }}
+            source={require(".././assets/images/cooking.png")}
+          />
+        ) : (
+          // component for mobile platforms
+          <LottieView
+            style={{
+              height: 100,
+              alignSelf: "center",
+              marginBottom: 30,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            source={require("../assets/animations/cooking.json")}
+            autoPlay={true}
+          />
+        )}
+
         <ScrollView>
           <MenuItems
             food={lastOrder.items}

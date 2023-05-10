@@ -32,7 +32,12 @@ const HeaderButton = (props) => (
       borderRadius: 30,
     }}
   >
-    <Text style={{ color: props.activeTab === props.text ? "white" : "black" }}>
+    <Text
+      style={{
+        paddingTop: 5,
+        color: props.activeTab === props.text ? "white" : "black",
+      }}
+    >
       {props.text}
     </Text>
   </TouchableOpacity>

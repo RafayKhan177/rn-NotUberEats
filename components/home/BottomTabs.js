@@ -27,9 +27,10 @@ const Icon = (props) => (
       <FontAwesome5
         name={props.icon}
         size={25}
+        color="gray"
         style={{ marginBottom: 3, alignSelf: "center" }}
       />
-      <Text>{props.text}</Text>
+      <Text style={{ color: "gray", fontSize: 8 }}>{props.text}</Text>
     </View>
   </TouchableOpacity>
 );

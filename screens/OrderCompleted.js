@@ -1,10 +1,11 @@
 import { View, Text, SafeAreaView, ScrollView, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-// import LottieView from "lottie-react-native";
+import LottieView from "lottie-react-native";
 import MenuItems from "../components/restaurantDetail/MenuItems";
 import { firebase } from "../firebase";
 import { Platform } from "react-native";
+import { FlatList } from "react-native";
 
 export default function OrderCompleted() {
   const [lastOrder, setLastOrder] = useState({
@@ -88,6 +89,14 @@ export default function OrderCompleted() {
         >
           🍴 Order placed at {restaurantName} for {totalUSD} USD! 🎉
         </Text>
+
+        <FlatList
+          data={lastOrder.items}
+          renderItem={({ item }) => (
+            <MenuItems food={[item]} hideCheckbox={true} marginLeft={8} />
+          )}
+          keyExtractor={(item, index) => index.toString()}
+        />
         {Platform.OS === "web" ? (
           // component for web platform
           <Image
@@ -105,7 +114,7 @@ export default function OrderCompleted() {
             style={{
               height: 100,
               alignSelf: "center",
-              marginBottom: 30,
+              marginVertical: 20,
               justifyContent: "center",
               alignItems: "center",
             }}
@@ -113,14 +122,6 @@ export default function OrderCompleted() {
             autoPlay={true}
           />
         )}
-
-        <ScrollView>
-          <MenuItems
-            food={lastOrder.items}
-            hideCheckbox={true}
-            marginLeft={8}
-          />
-        </ScrollView>
       </View>
     </SafeAreaView>
   );

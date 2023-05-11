@@ -30,11 +30,12 @@ const HeaderButton = (props) => (
       paddingVertical: 6,
       paddingHorizontal: 16,
       borderRadius: 30,
+      // marginTop: 10,
     }}
   >
     <Text
       style={{
-        paddingTop: 5,
+        // paddingTop: 5,
         color: props.activeTab === props.text ? "white" : "black",
       }}
     >

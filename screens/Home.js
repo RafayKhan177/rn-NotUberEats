@@ -11,7 +11,8 @@ const pic =
 const localRestaurants = [
   {
     name: "Pizza Palace",
-    imageUrl: pic,
+    imageUrl:
+      "https://plus.unsplash.com/premium_photo-1682800179834-c05e7c7d0a09?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     categories: ["Italian", "Pizza", "Takeout"],
     reviews: [
       {
@@ -30,7 +31,8 @@ const localRestaurants = [
   },
   {
     name: "Sushi Spot",
-    imageUrl: pic,
+    imageUrl:
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     categories: ["Japanese", "Sushi", "Dine-in"],
     reviews: [
       {
@@ -49,7 +51,8 @@ const localRestaurants = [
   },
   {
     name: "Burger Barn",
-    imageUrl: pic,
+    imageUrl:
+      "https://images.unsplash.com/photo-1515669097368-22e68427d265?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     categories: ["American", "Burgers", "Takeout"],
     reviews: [
       {
@@ -68,7 +71,8 @@ const localRestaurants = [
   },
   {
     name: "Pizza Palace",
-    imageUrl: pic,
+    imageUrl:
+      "https://images.unsplash.com/photo-1570560258879-af7f8e1447ac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
     categories: ["Italian", "Pizza", "Takeout"],
     reviews: [
       {
@@ -87,7 +91,8 @@ const localRestaurants = [
   },
   {
     name: "Sushi Spot",
-    imageUrl: pic,
+    imageUrl:
+      "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     categories: ["Japanese", "Sushi", "Dine-in"],
     reviews: [
       {
@@ -106,7 +111,8 @@ const localRestaurants = [
   },
   {
     name: "Burger Barn",
-    imageUrl: pic,
+    imageUrl:
+      "https://images.unsplash.com/photo-1521917441209-e886f0404a7b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1460&q=80",
     categories: ["American", "Burgers", "Takeout"],
     reviews: [
       {
@@ -125,7 +131,8 @@ const localRestaurants = [
   },
   {
     name: "Pizza Palace",
-    imageUrl: pic,
+    imageUrl:
+      "https://images.unsplash.com/photo-1587574293340-e0011c4e8ecf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80",
     categories: ["Italian", "Pizza", "Takeout"],
     reviews: [
       {
@@ -144,7 +151,8 @@ const localRestaurants = [
   },
   {
     name: "Sushi Spot",
-    imageUrl: pic,
+    imageUrl:
+      "https://images.unsplash.com/photo-1573668200361-62e141908294?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
     categories: ["Japanese", "Sushi", "Dine-in"],
     reviews: [
       {
@@ -163,7 +171,8 @@ const localRestaurants = [
   },
   {
     name: "Burger Barn",
-    imageUrl: pic,
+    imageUrl:
+      "https://images.unsplash.com/photo-1543373072-69f3d4788832?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
     categories: ["American", "Burgers", "Takeout"],
     reviews: [
       {
@@ -184,35 +193,44 @@ const localRestaurants = [
 ];
 
 const Home = ({ navigation }) => {
-  const [restaurantData, setRestaurantData] = useState([]);
+  const [restaurantData, setRestaurantData] = useState(localRestaurants);
   const [city, setCity] = useState("San Franciscco");
   const [activeTab, setActiveTab] = useState("Delivery");
 
-  const getRestaurantFromYulp = () => {
-    setRestaurantData(localRestaurants);
+  const getRestaurantFromYelp = () => {
+    const YELP_API_KEY =
+      "mQczejslcQjs2OCUjQPaOgIYGqT5VIIjaehFGir8bEx0zwJKcc2LfmtG6ljPA8SFawt4CKsYhOY_-zOYwa112GSbuabEe283W1r-OCbWSByolsEnfqCLZPpTDqJbZHYx";
 
-    // const yulpUrl = ``;
-    // const apiOption = {
-    //   headers: {
-    //     Authorization: `Bearer${YULP_API_KEY}`,
-    //   },
-    // };
-    // return fetch(yulpUrl, apiOption)
-    //   .then((res) => rex.json())
-    //   .then((json) =>
-    //     setRestaurantData(
-    //       json.business.filter((business) =>
-    //         business.transections.includes(activeTab.toLowerCase())
-    //       )
-    //     )
-    //   );
+    const yelpUrl = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/business/search?term=restaurant&location=usa`;
+    const apiOptions = {
+      headers: {
+        Authorization: `Bearer ${YELP_API_KEY}`,
+        Origin: "localhost:19006",
+        withCredentials: true,
+      },
+    };
+
+    return fetch(yelpUrl, apiOptions)
+      .then((res) => {
+        console.log("Yelp API response status:", res.status);
+        return res.json();
+      })
+      .then((json) => {
+        console.log("Yelp API response:", json);
+        setRestaurantData(json.business);
+      })
+      .catch((error) => {
+        console.error("Error fetching data from Yelp API:", error);
+        console.log("Response:", error.response);
+      });
   };
 
   useEffect(() => {
-    getRestaurantFromYulp();
+    getRestaurantFromYelp();
   }, [city, activeTab]);
+
   return (
-    <SafeAreaView style={{ backgroundColor: "#eee" }}>
+    <SafeAreaView style={{ backgroundColor: "#eee", flex: 1 }}>
       <View style={{ backgroundColor: "white", paddingTop: 15 }}>
         <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} />
         <SearchBar cityHandler={setCity} />

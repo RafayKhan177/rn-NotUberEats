@@ -1,11 +1,18 @@
-import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Modal,
+  StyleSheet,
+  ScrollView,
+  FlatList,
+} from "react-native";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import OrderItem from "./OrderItem";
 import { firebase } from "../../firebase";
 import { Platform } from "react-native";
 import LottieView from "lottie-react-native";
-import lottie from "lottie-web";
 import { Image } from "react-native";
 
 export default function ViewCart({ navigation }) {
@@ -85,9 +92,12 @@ export default function ViewCart({ navigation }) {
         <View style={styles.modalContainer}>
           <View style={styles.modalCheckoutContaienr}>
             <Text style={styles.restaurantName}>{restaurantName}</Text>
-            {items.map((item, index) => (
-              <OrderItem key={index} item={item} />
-            ))}
+            <FlatList
+              data={items}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => <OrderItem item={item} />}
+            />
+
             <View style={styles.subTotalContainer}>
               <Text style={styles.subTotalText}>Subtotal</Text>
               <Text>{totalUSD}</Text>
@@ -149,7 +159,7 @@ export default function ViewCart({ navigation }) {
             justifyContent: "center",
             flexDirection: "row",
             position: "absolute",
-            bottom: 80,
+            bottom: 50,
             zIndex: 999,
             justifyContent: "center",
             alignItems: "center",
@@ -166,7 +176,7 @@ export default function ViewCart({ navigation }) {
             <TouchableOpacity
               style={{
                 marginTop: 20,
-                backgroundColor: "black",
+                backgroundColor: "rgba(0, 0, 0, 0.89)",
                 flexDirection: "row",
                 justifyContent: "center",
                 alignSelf: "center",
@@ -177,9 +187,7 @@ export default function ViewCart({ navigation }) {
               }}
               onPress={() => setModalVisible(true)}
             >
-              <Text style={{ color: "white", fontSize: 20, marginRight: 30 }}>
-                View Cart
-              </Text>
+              <Text style={{ color: "white", fontSize: 20 }}>View Cart</Text>
               {/* <Text style={{ fontSize: 20, color: "white" }}>{totalUSD}</Text> */}
             </TouchableOpacity>
           </View>
@@ -213,7 +221,7 @@ export default function ViewCart({ navigation }) {
           ) : (
             // component for mobile platforms
             <LottieView
-              style={{ height: 200 }}
+              style={{ height: 200, alignSelf: "center" }}
               source={require("../../assets/animations/scanner.json")}
               autoPlay={3}
             />

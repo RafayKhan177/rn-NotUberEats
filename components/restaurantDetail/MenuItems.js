@@ -49,14 +49,14 @@ export default function MenuItems({
     cartItems.find((item) => item.title === food.title);
 
   const renderItem = ({ item }) => (
-    <View>
+    <View style={{ maxWidth: 500, alignSelf: "center" }}>
       <View style={styles.menuItemStyle}>
         {/* here */}
         {hideCheckbox ? (
           <></>
         ) : (
           <BouncyCheckbox
-            isChecked={isFoodCart(food, cartItems)}
+            isChecked={isFoodCart(item, cartItems)}
             onPress={(checkBoxValue) => selectItems(item, checkBoxValue)}
           />
         )}
